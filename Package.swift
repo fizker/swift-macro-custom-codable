@@ -1,5 +1,6 @@
 // swift-tools-version: 6.0
 
+import CompilerPluginSupport
 import PackageDescription
 
 let package = Package(
@@ -10,25 +11,26 @@ let package = Package(
 	],
 	products: [
 		.library(
-			name: "swift-macro-coding-keys",
-			targets: ["Implementation"]
+			name: "CodingKeysMacro",
+			targets: ["CodingKeysMacro"]
 		),
 	],
 	dependencies: [
 		.package(url: "https://github.com/swiftlang/swift-syntax.git", from: "600.0.1"),
 	],
 	targets: [
-		.target(
-			name: "Implementation",
+		.macro(
+			name: "CodingKeysMacroImplementation",
 			dependencies: [
 				.product(name: "SwiftSyntax", package: "swift-syntax"),
 				.product(name: "SwiftSyntaxMacros", package: "swift-syntax"),
+				.product(name: "SwiftCompilerPlugin", package: "swift-syntax"),
 			]
 		),
 		.target(
-			name: "Interface",
+			name: "CodingKeysMacro",
 			dependencies: [
-				"Implementation",
+				"CodingKeysMacroImplementation",
 			]
 		),
 	]
@@ -39,9 +41,9 @@ let package = Package(
 // We can't write a test target for macros on Windows because that results in duplicate definitoions of `main`: Once
 // from the macro (which is effectively an executable), and once from the test bundle.
 package.targets.append(.testTarget(
-	name: "ImplementationTests",
+	name: "CodingKeysMacroImplementationTests",
 	dependencies: [
-		"Implementation",
+		"CodingKeysMacroImplementation",
 		.product(name: "SwiftSyntaxMacros", package: "swift-syntax"),
 		.product(name: "SwiftSyntaxMacrosTestSupport", package: "swift-syntax"),
 	]
