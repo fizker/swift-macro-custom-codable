@@ -15,7 +15,7 @@
 // MARK: - Custom Codable
 
 @attached(member, names: named(CodingKeys))
-public macro CustomCodable() = #externalMacro(module: "CodingKeysMacroImplementation", type: "CustomCodable")
+public macro CustomCodable() = #externalMacro(module: "CustomCodableMacroImplementation", type: "CustomCodable")
 
 @attached(peer)
-public macro CodableKey(name: String) = #externalMacro(module: "CodingKeysMacroImplementation", type: "CodableKey")
+public macro CodableKey(name: String) = #externalMacro(module: "CustomCodableMacroImplementation", type: "CodableKey")

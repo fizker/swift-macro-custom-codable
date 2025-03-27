@@ -4,7 +4,7 @@ import CompilerPluginSupport
 import PackageDescription
 
 let package = Package(
-	name: "swift-macro-coding-keys",
+	name: "swift-macro-custom-codable",
 	platforms: [
 		.iOS(.v13),
 		.macCatalyst(.v13),
@@ -14,8 +14,8 @@ let package = Package(
 	],
 	products: [
 		.library(
-			name: "CodingKeysMacro",
-			targets: ["CodingKeysMacro"]
+			name: "CustomCodableMacro",
+			targets: ["CustomCodableMacro"]
 		),
 	],
 	dependencies: [
@@ -23,7 +23,7 @@ let package = Package(
 	],
 	targets: [
 		.macro(
-			name: "CodingKeysMacroImplementation",
+			name: "CustomCodableMacroImplementation",
 			dependencies: [
 				.product(name: "SwiftSyntax", package: "swift-syntax"),
 				.product(name: "SwiftSyntaxMacros", package: "swift-syntax"),
@@ -31,9 +31,9 @@ let package = Package(
 			]
 		),
 		.target(
-			name: "CodingKeysMacro",
+			name: "CustomCodableMacro",
 			dependencies: [
-				"CodingKeysMacroImplementation",
+				"CustomCodableMacroImplementation",
 			]
 		),
 	]
@@ -44,9 +44,9 @@ let package = Package(
 // We can't write a test target for macros on Windows because that results in duplicate definitoions of `main`: Once
 // from the macro (which is effectively an executable), and once from the test bundle.
 package.targets.append(.testTarget(
-	name: "CodingKeysMacroImplementationTests",
+	name: "CustomCodableMacroImplementationTests",
 	dependencies: [
-		"CodingKeysMacroImplementation",
+		"CustomCodableMacroImplementation",
 		.product(name: "SwiftSyntaxMacros", package: "swift-syntax"),
 		.product(name: "SwiftSyntaxMacrosTestSupport", package: "swift-syntax"),
 	]
