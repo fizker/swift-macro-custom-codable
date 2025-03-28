@@ -12,7 +12,7 @@
 //
 //===----------------------------------------------------------------------===//
 
-import Implementation
+import CustomCodableMacroImplementation
 import SwiftSyntaxMacros
 import SwiftSyntaxMacrosTestSupport
 import XCTest
