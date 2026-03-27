@@ -36,6 +36,13 @@ let package = Package(
 				"CustomCodableMacroImplementation",
 			],
 		),
+
+		.testTarget(
+			name: "CustomCodableTests",
+			dependencies: [
+				"CustomCodableMacro",
+			]
+		),
 	],
 )
 
