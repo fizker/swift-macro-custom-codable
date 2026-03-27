@@ -1,4 +1,4 @@
-// swift-tools-version: 6.0
+// swift-tools-version: 6.3
 
 import CompilerPluginSupport
 import PackageDescription
@@ -19,7 +19,7 @@ let package = Package(
 		),
 	],
 	dependencies: [
-		.package(url: "https://github.com/swiftlang/swift-syntax.git", from: "600.0.1"),
+		.package(url: "https://github.com/swiftlang/swift-syntax.git", from: "603.0.0"),
 	],
 	targets: [
 		.macro(
@@ -28,15 +28,15 @@ let package = Package(
 				.product(name: "SwiftSyntax", package: "swift-syntax"),
 				.product(name: "SwiftSyntaxMacros", package: "swift-syntax"),
 				.product(name: "SwiftCompilerPlugin", package: "swift-syntax"),
-			]
+			],
 		),
 		.target(
 			name: "CustomCodableMacro",
 			dependencies: [
 				"CustomCodableMacroImplementation",
-			]
+			],
 		),
-	]
+	],
 )
 
 #if !os(Windows)
@@ -49,6 +49,6 @@ package.targets.append(.testTarget(
 		"CustomCodableMacroImplementation",
 		.product(name: "SwiftSyntaxMacros", package: "swift-syntax"),
 		.product(name: "SwiftSyntaxMacrosTestSupport", package: "swift-syntax"),
-	]
+	],
 ))
 #endif
