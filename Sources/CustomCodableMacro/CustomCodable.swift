@@ -19,3 +19,10 @@ public macro CustomCodable() = #externalMacro(module: "CustomCodableMacroImpleme
 
 @attached(peer)
 public macro CodableKey(name: String) = #externalMacro(module: "CustomCodableMacroImplementation", type: "CodableKey")
+
+@attached(peer)
+public macro CodableKey(options: CodableKeyOptions) = #externalMacro(module: "CustomCodableMacroImplementation", type: "CodableKey")
+
+public enum CodableKeyOptions {
+	case ignore
+}

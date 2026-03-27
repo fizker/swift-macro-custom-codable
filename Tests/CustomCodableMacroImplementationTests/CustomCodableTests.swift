@@ -73,4 +73,32 @@ final class CustomCodableTests: XCTestCase {
       indentationWidth: .spaces(2)
     )
   }
+
+	func testExpansionWith() {
+		assertMacroExpansion(
+			"""
+			@CustomCodable
+			struct Person {
+			  let name: String
+			  @CodableKey(.ignore) let age: Int
+
+			  func randomFunction() {}
+			}
+			""",
+			expandedSource: """
+			struct Person {
+			  let name: String
+			  @CodableKey(.ignore) let age: Int
+
+			  func randomFunction() {}
+
+			  enum CodingKeys: String, CodingKey {
+			    case name
+			  }
+			}
+			""",
+			macros: macros,
+			indentationWidth: .spaces(2),
+		)
+	}
 }

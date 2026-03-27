@@ -46,6 +46,9 @@ public enum CustomCodable: MemberMacro {
           .first!
           .expression
 
+        guard customKeyValue.description != ".ignore"
+        else { return nil }
+
         return "case \(propertyName) = \(customKeyValue)"
       } else {
         return "case \(propertyName)"
