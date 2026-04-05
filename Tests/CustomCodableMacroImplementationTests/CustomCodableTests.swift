@@ -18,7 +18,10 @@ import SwiftSyntaxMacrosTestSupport
 import XCTest
 
 final class CustomCodableTests: XCTestCase {
-  private let macros = ["CustomCodable": CustomCodable.self]
+	private let macros: [String: Macro.Type] = [
+		"CustomCodable": CustomCodable.self,
+		"CodableKey": CodableKey.self,
+	]
 
   func testExpansionAddsDefaultCodingKeys() {
     assertMacroExpansion(
@@ -59,7 +62,7 @@ final class CustomCodableTests: XCTestCase {
       expandedSource: """
         struct Person {
           let name: String
-          @CodableKey("user_age") let age: Int
+          let age: Int
 
           func randomFunction() {}
 
@@ -88,7 +91,7 @@ final class CustomCodableTests: XCTestCase {
 			expandedSource: """
 			struct Person {
 			  let name: String
-			  @CodableKey(.ignore) let age: Int
+			  let age: Int
 
 			  func randomFunction() {}
 
